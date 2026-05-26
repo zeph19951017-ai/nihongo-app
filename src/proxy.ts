@@ -1,5 +1,6 @@
 /**
- * 檔案用途：Next.js Middleware — 路由保護
+ * 檔案用途：Next.js Proxy（原 Middleware）— 路由保護
+ * Next.js 16 起 middleware 改名為 proxy，函數名稱需為 proxy
  * 負責：
  * 1. 未登入者訪問 /admin/* 或 /dashboard/* → 跳轉 /login
  * 2. 已登入者訪問 /login → 跳轉對應角色首頁
@@ -9,7 +10,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
   // 建立 Supabase 客戶端（middleware 專用，需要讀寫 cookie）
